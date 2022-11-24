@@ -17,6 +17,9 @@ It is low level (raw) form of data and is also human readable.
 
 ![mainDash](https://user-images.githubusercontent.com/119005653/203849360-6870cf36-5099-4bae-9d78-2d82749e9eb2.png)
 
+![registrationDashboard](https://user-images.githubusercontent.com/119005653/203850084-ff9b4f40-7864-4d8f-a477-c7f9ad843693.png)
+
 ![database](https://user-images.githubusercontent.com/119005653/203849396-9745e57e-5bee-4d8e-9774-ea7ea1d29441.png)
+
 
 
