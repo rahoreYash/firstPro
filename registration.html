@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+
+    <script src="http://login2explore.com/jpdb/resources/js/0.0.3/jpdb-commons.js"></script>
+
+</head>
+
+<style>
+    
+</style>
+
+
+<body>
+
+
+    <div class="container">
+        <div class="screen">
+            <div class="screen__content">
+                <form class="login">
+                    <h1 style="padding:10px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Register</h1>
+                    <div class="register__field">
+                        <i class="login__icon fas fa-user"></i>
+                        <input type="text" id="email_id" class="register__input" placeholder="User name / Email">
+                    </div>
+                    <div class="register__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="text" id="name_id" class="register__input" placeholder="Name">
+                    </div>
+                    <div class="register__field">
+                        <i class="login__icon fas fa-lock"></i>
+                        <input type="text" id="place_id" class="register__input" placeholder="Place">
+                    </div>
+                    <button type="button" class="button register__submit" onclick="submit_data()">
+                        <span class="button__text">Register</span>
+                        <!-- <i class="button__icon fas fa-chevron-right"></i> -->
+                    </button>
+                    <button type="button" class="button register__back" onclick="back_btn()">
+                        <span class="button__text">Back</span>
+                        <!-- <i class="button__icon fas fa-chevron-right"></i> -->
+                    </button>
+                </form>
+            </div>
+            <div class="screen__background">
+                <span class="screen__background__shape screen__background__shape4"></span>
+                <span class="screen__background__shape screen__background__shape3"></span>
+                <span class="screen__background__shape screen__background__shape2"></span>
+                <span class="screen__background__shape screen__background__shape1"></span>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+        function validateAndGetFormData() {
+            var emailVar = $("#email_id").val();
+            if (emailVar == "") {
+                alert("Email is Required Value");
+                $("#email_id").focus();
+                return "";
+            }
+            var nameVar = $("#name_id").val();
+            if (nameVar === "") {
+                alert("Name is Required Value");
+                $("#name_id").focus();
+                return "";
+            }
+            var placeVar = $("#place_id").val();
+            if (placeVar === "") {
+                alert("Place is Required Value");
+                $("#place_id").focus();
+                return "";
+            }
+            var jsonStrObj = {
+                email: emailVar,
+                name: nameVar,
+                place: placeVar,
+            };
+            return JSON.stringify(jsonStrObj);
+        }
+
+
+        function resetForm() {
+            $("#email_id").val("")
+            $("#name_id").val("");
+            $("#place_id").val("");
+            $("#email_id").focus();
+        }
+
+
+        function submit_data() {
+            var jsonStr = validateAndGetFormData();
+            if (jsonStr === "") {
+                return;
+            }
+            var putReqStr = createPUTRequest("90937995|-31949265572117278|90953702",
+                jsonStr, "TESTING", "TEST-REL");
+
+            jQuery.ajaxSetup({ async: false });
+            var resultObj = executeCommandAtGivenBaseUrl(putReqStr,"http://api.login2explore.com:5577", "/api/iml");
+            jQuery.ajaxSetup({ async: true });
+
+            resetForm();
+            alert("Successfully Registered");
+        }
+
+        function back_btn(){
+            window.location="index.html";
+        }
+
+    </script>
+
+
+</body>
+
+</html>
